@@ -1,6 +1,6 @@
 // Offline support: keep the page, the agenda and speaker photos on the device.
 // The build script rewrites AGENDA_VERSION whenever the agenda changes.
-const AGENDA_VERSION = "e2059fec504d";
+const AGENDA_VERSION = "e72982b83a5b";
 const CACHE = `tmconf-${AGENDA_VERSION}`;
 const CORE = ["./", "index.html", "agenda.json", "manifest.webmanifest", "icon.svg"];
 

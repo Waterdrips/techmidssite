@@ -27,6 +27,12 @@
    "role": "User Experience Designer @ Voxpopme",
    "img": "img/BeckiFloyd.webp"
   },
+  "SimonStevens": {
+   "key": "SimonStevens",
+   "name": "Simon Stevens",
+   "role": "Executive Director of Software Engineering @ Goldman Sachs",
+   "img": "img/SimonStevens.webp"
+  },
   "StefanCornea": {
    "key": "StefanCornea",
    "name": "Stefan Cornea",
@@ -50,6 +56,12 @@
    "name": "Eriol Fox",
    "role": "Open Source Designer",
    "img": "img/EriolFox.webp"
+  },
+  "MikolajMaciejak": {
+   "key": "MikolajMaciejak",
+   "name": "Mikolaj Maciejak",
+   "role": "VP/Executive Director of Core IAM Services @ Goldman Sachs",
+   "img": "img/MikolajMaciejak.webp"
   },
   "MartinReynolds": {
    "key": "MartinReynolds",
@@ -211,14 +223,19 @@
      "url": "https://conf.techmids.org/speakers/BeckiFloyd"
     },
     {
-     "id": "goldman-sachs-screen-3-0945",
+     "id": "SimonStevens",
      "room": "Screen 3",
-     "title": "Keynote from our sponsor Goldman Sachs - talk details TBC",
-     "speakers": [],
-     "by": "Goldman Sachs",
-     "abstract": [],
-     "type": "Talk",
-     "url": ""
+     "title": "Financial Engineering: How to build an electronic trading platform",
+     "speakers": [
+      "SimonStevens"
+     ],
+     "by": "",
+     "abstract": [
+      "A client asks for a price on a five-year swap. Within a fraction of a second, a quoting system has to parse the request, work out who is asking, check risk limits, calculate a price, and send a quote back. If it's slow, the trade goes elsewhere. If it's wrong, it costs real money.",
+      "So how would you build one? In this talk, we'll walk through a design for an electronic quoting and trading platform. You don't need any finance background. We'll start with the products and the maths behind pricing them, with real code. Then we'll look at the protocols that move quote requests around the world. From there we'll assemble the architecture piece by piece."
+     ],
+     "type": "Keynote",
+     "url": "https://conf.techmids.org/speakers/SimonStevens"
     }
    ]
   },
@@ -300,14 +317,18 @@
      "url": "https://conf.techmids.org/speakers/EriolFox"
     },
     {
-     "id": "goldman-sachs-screen-2-1115",
+     "id": "MikolajMaciejak",
      "room": "Screen 2",
-     "title": "Talk from our sponsor Goldman Sachs - talk details TBC",
-     "speakers": [],
-     "by": "Goldman Sachs",
-     "abstract": [],
+     "title": "CVE Explosion and the Future of Open Source",
+     "speakers": [
+      "MikolajMaciejak"
+     ],
+     "by": "",
+     "abstract": [
+      "In 2026 we witnessed vulnerability explosion, which adds tremendous pressure on open source maintenance and costs. Let's have a closer look at why and how this happened and what it means for the future of open source software."
+     ],
      "type": "Talk",
-     "url": ""
+     "url": "https://conf.techmids.org/speakers/MikolajMaciejak"
     },
     {
      "id": "MartinReynolds",
@@ -659,6 +680,6 @@
    ]
   }
  ],
- "version": "e2059fec504d",
- "generated": "2026-11-20T15:23:55.135Z"
+ "version": "e72982b83a5b",
+ "generated": "2026-11-20T22:41:07.345Z"
 }
