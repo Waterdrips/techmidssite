@@ -3,34 +3,45 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Alistair at TechMids Conf</title>
-</head>
-<body>
+<title>TechMids Conf talk picker</title>
+<meta name="description" content="Pick one talk per slot at TechMids Conf 2026 and get your own itinerary for the day. Works offline.">
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <style>
-/* Layout: one narrow column; live NOW/NEXT banner, QR button, then a time-rail itinerary. Fully self-contained for offline use. */
+/* One narrow column: live NOW/NEXT banner, a Pick / My day switch, then the agenda. No CDN, fonts or third-party calls. */
 :root{
   --bg:#f3f5f7; --surface:#ffffff; --fg:#14202b; --muted:#5b6b78; --line:#d9e0e6;
-  --accent:#1f5f8b; --accent-ink:#ffffff; --now:#c98a00; --now-bg:#fff6df; --warn:#b3261e; --warn-bg:#fde8e6;
+  --accent:#1f5f8b; --accent-ink:#ffffff; --accent-soft:#e3eef6; --now:#c98a00; --now-bg:#fff6df; --warn:#b3261e; --warn-bg:#fde8e6;
   --display:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0e151c; --surface:#16212b; --fg:#e8eef3; --muted:#93a4b2; --line:#26343f;
-  --accent:#5fa8d8; --accent-ink:#0b1218; --now:#f2b632; --now-bg:#2a2410; --warn:#ff8a80; --warn-bg:#3a1714; color-scheme:dark}}
+  --accent:#5fa8d8; --accent-ink:#0b1218; --accent-soft:#17303f; --now:#f2b632; --now-bg:#2a2410; --warn:#ff8a80; --warn-bg:#3a1714; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0e151c; --surface:#16212b; --fg:#e8eef3; --muted:#93a4b2; --line:#26343f;
-  --accent:#5fa8d8; --accent-ink:#0b1218; --now:#f2b632; --now-bg:#2a2410; --warn:#ff8a80; --warn-bg:#3a1714; color-scheme:dark}
+  --accent:#5fa8d8; --accent-ink:#0b1218; --accent-soft:#17303f; --now:#f2b632; --now-bg:#2a2410; --warn:#ff8a80; --warn-bg:#3a1714; color-scheme:dark}
 [hidden]{display:none!important}
+*{box-sizing:border-box}
 html{background:var(--bg)}
 body{background:var(--bg);color:var(--fg);font-family:var(--display);font-size:16px;line-height:1.45;margin:0}
-.wrap{max-width:560px;margin:0 auto;padding-block:20px 48px;
+button{font:inherit;color:inherit}
+a{color:var(--accent)}
+.wrap{max-width:600px;margin:0 auto;padding-block:20px 48px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
-  display:flex;flex-direction:column;gap:20px}
+  display:flex;flex-direction:column;gap:18px}
 header{display:flex;flex-direction:column;gap:6px}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 h1{font-size:2rem;line-height:1.1;font-weight:800;margin:0;text-wrap:balance}
 .meta{color:var(--muted);font-size:.95rem}
 .meta a{color:inherit}
+
+/* Notices */
+.notice{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px;font-size:.92rem;display:flex;flex-direction:column;gap:8px}
+.notice.warn{border-color:var(--warn);background:var(--warn-bg)}
+.notice .row{display:flex;gap:8px;flex-wrap:wrap}
+
 /* Live banner */
 .live{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .live-row{display:grid;grid-template-columns:58px 1fr;gap:12px;padding:12px 14px;align-items:start}
@@ -45,99 +56,161 @@ h1{font-size:2rem;line-height:1.1;font-weight:800;margin:0;text-wrap:balance}
 .room{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:.75rem;font-weight:700;padding:3px 8px;border-radius:6px;
   color:var(--warn);background:var(--warn-bg);border:1px solid var(--warn)}
 .room.stay{color:var(--muted);background:transparent;border-color:var(--line)}
-.qr-btn{appearance:none;border:0;cursor:pointer;width:100%;padding:18px 20px;border-radius:14px;
-  background:var(--accent);color:var(--accent-ink);font:800 1.15rem var(--display);
-  display:flex;align-items:center;justify-content:center;gap:12px}
-.qr-btn:focus-visible{outline:3px solid var(--now);outline-offset:3px}
-.qr-btn svg{width:26px;height:26px}
-.handle{text-align:center;font-family:var(--mono);font-size:.85rem;color:var(--muted);margin-top:-10px}
-.handle a{color:inherit}
-h2{font-size:.8rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:8px 0 0;font-weight:700}
-ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
-li{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:14px 10px;border-bottom:1px solid var(--line);border-radius:10px}
-li>div{min-width:0}
-.t{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums;font-size:.95rem;padding-top:2px}
-.title{font-weight:600;font-size:1.05rem;line-height:1.3}
-.who{color:var(--muted);font-size:.9rem}
+
+/* View switch */
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;margin:-8px 0}
+.switch{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+.switch button{appearance:none;border:0;background:transparent;border-radius:9px;padding:10px 8px;font-weight:700;cursor:pointer}
+.switch button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.switch button:focus-visible{outline:3px solid var(--now);outline-offset:2px}
+.count{font-family:var(--mono);font-size:.75rem;opacity:.85;margin-left:4px}
+
+/* Slots */
+.slot{display:flex;flex-direction:column;gap:8px}
+.slot-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:6px}
+.slot-time{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums}
+.slot-state{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.slot-state.done{color:var(--accent)}
+.slot.now .slot-time::after{content:" · NOW";color:var(--now)}
+.slot.past{opacity:.55}
+.fixed{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:10px 12px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);font-size:.92rem}
+.fixed .slot-time{color:var(--fg)}
+.cards{display:flex;flex-direction:column;gap:8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.card.picked{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);background:linear-gradient(var(--accent-soft),var(--accent-soft)) top/100% 0 no-repeat,var(--surface)}
+.pick{appearance:none;border:0;background:transparent;width:100%;text-align:left;cursor:pointer;
+  display:grid;grid-template-columns:48px 1fr 28px;gap:12px;padding:12px 12px 10px;align-items:start}
+.pick:focus-visible{outline:3px solid var(--now);outline-offset:-3px;border-radius:14px}
+.avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;background:var(--accent-soft);display:grid;place-items:center;
+  font-weight:800;color:var(--accent);font-size:1rem;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.pick>div{min-width:0}
 .screen{display:inline-block;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.04em;
   padding:2px 7px;border-radius:5px;border:1px solid var(--accent);color:var(--accent);margin-bottom:4px}
+.title{font-weight:650;font-size:1.02rem;line-height:1.3;overflow-wrap:anywhere}
+.who{color:var(--muted);font-size:.88rem}
+.tick{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;margin-top:2px}
+.picked .tick{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tick svg{width:15px;height:15px;opacity:0}
+.picked .tick svg{opacity:1}
+details{border-top:1px solid var(--line)}
+summary{cursor:pointer;padding:8px 12px 8px 72px;font-size:.85rem;color:var(--accent);font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";display:inline-block;width:1em}
+details[open] summary::before{content:"▾ "}
+.abstract{padding:0 14px 12px 72px;font-size:.92rem}
+.abstract p{margin:0 0 .6em}
+@media (max-width:380px){summary,.abstract{padding-left:14px}}
+
+/* My day */
+ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+li.it{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:14px 10px;border-bottom:1px solid var(--line);border-radius:10px}
+li.it>div{min-width:0}
+.t{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums;font-size:.95rem;padding-top:2px}
 li.gap .title{font-weight:400;color:var(--muted)}
+li.empty .title{font-weight:400;color:var(--muted);font-style:italic}
 li.past{opacity:.45}
 li.now{background:var(--now-bg);border-bottom-color:transparent;box-shadow:inset 4px 0 0 var(--now)}
 li.now .t::after{content:"NOW";display:block;font-size:.65rem;color:var(--now);margin-top:4px;letter-spacing:.08em}
 li.next .t::after{content:"NEXT";display:block;font-size:.65rem;color:var(--accent);margin-top:4px;letter-spacing:.08em}
-.alt{font-size:.85rem;color:var(--muted);margin-top:4px}
-footer{font-size:.85rem;color:var(--muted);text-align:center}
-footer a{color:inherit}
-/* QR overlay: always black on white so it scans in any theme */
-.overlay{position:fixed;inset:0;z-index:50;background:#ffffff;color:#111111;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer;
-  padding:calc(24px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px))}
-.overlay .code{width:min(88vw,70vh,560px);aspect-ratio:1;max-width:100%}
-.overlay .code svg{width:100%;height:100%;display:block}
-.overlay .name{font:800 1.6rem var(--display)}
-.overlay .sub{font-family:var(--mono);font-size:.85rem;color:#555555}
-.overlay .hint{font-size:.8rem;color:#777777}
-.close-btn{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));
-  appearance:none;border:2px solid #111111;background:#ffffff;color:#111111;border-radius:999px;
-  font:700 1rem var(--display);padding:10px 18px;cursor:pointer}
-.close-btn:focus-visible{outline:3px solid #1f5f8b;outline-offset:2px}
-@media (prefers-reduced-motion:no-preference){.overlay:not([hidden]){animation:pop .18s ease-out}
-  @keyframes pop{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}}
-</style>
+.linkbtn{appearance:none;border:0;background:none;padding:0;color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.mv{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--warn);margin-top:4px}
 
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:focus-visible,.linkbtn:focus-visible{outline:3px solid var(--now);outline-offset:2px}
+footer{font-size:.82rem;color:var(--muted);text-align:center;display:flex;flex-direction:column;gap:4px}
+footer a{color:inherit}
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);
+  padding:10px 16px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:20;max-width:calc(100vw - 32px);text-align:center}
+</style>
+</head>
+<body>
 <div class="wrap">
   <header>
-    <span class="eyebrow">TechMids Conf 2026 · Birmingham</span>
-    <h1>Alistair's day at TechMids</h1>
-    <div class="meta">Fri 27 Nov 2026 · 08:30–17:15<br>
-      <a href="https://www.google.com/maps/search/?api=1&query=Everyman+Cinema+Mailbox+Birmingham">Everyman Cinema, The Mailbox, Birmingham</a></div>
+    <span class="eyebrow" id="eyebrow">TechMids Conf 2026 · Birmingham</span>
+    <h1>Pick your talks</h1>
+    <div class="meta" id="meta">Fri 27 Nov 2026 · Everyman Cinema, The Mailbox</div>
   </header>
 
-  <div class="live" id="live" aria-live="polite"></div>
+  <div id="notices"></div>
+  <div class="live" id="live" aria-live="polite" hidden></div>
 
-  <button class="qr-btn" id="qrBtn" type="button" aria-haspopup="dialog">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4M20 17v3"/></svg>
-    Connect on LinkedIn
-  </button>
-  <div class="handle"><a href="https://www.linkedin.com/in/alistair-hey" target="_blank" rel="noopener">linkedin.com/in/alistair-hey</a></div>
+  <div class="bar">
+    <div class="switch" role="tablist" aria-label="View">
+      <button type="button" role="tab" id="tabPick" aria-controls="viewPick" aria-selected="true">Pick talks</button>
+      <button type="button" role="tab" id="tabDay" aria-controls="viewDay" aria-selected="false">My day<span class="count" id="count"></span></button>
+    </div>
+  </div>
 
-  <section>
-    <h2>My itinerary</h2>
-    <ol id="agenda"></ol>
+  <section id="viewPick" role="tabpanel" aria-labelledby="tabPick">
+    <div id="slots"><p class="meta">Loading the agenda…</p></div>
   </section>
 
-  <footer>Full agenda at <a href="https://conf.techmids.org" target="_blank" rel="noopener">conf.techmids.org</a></footer>
-</div>
+  <section id="viewDay" role="tabpanel" aria-labelledby="tabDay" hidden>
+    <ol id="day"></ol>
+    <div class="actions" style="margin-top:16px">
+      <button class="btn primary" type="button" id="shareBtn">Share my picks</button>
+      <button class="btn" type="button" id="clearBtn">Clear picks</button>
+    </div>
+  </section>
 
-<div class="overlay" id="overlay" role="dialog" aria-label="LinkedIn QR code" hidden tabindex="-1">
-  <button class="close-btn" id="closeBtn" type="button">Close ✕</button>
-  <div class="code"><svg viewBox="0 0 33 33" shape-rendering="crispEdges" role="img" aria-label="QR code for linkedin.com/in/alistair-hey"><rect width="33" height="33" fill="#ffffff"/><path fill="#000000" d="M2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM5 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM11 2h1v1h-1zM12 2h1v1h-1zM15 2h1v1h-1zM19 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM26 2h1v1h-1zM27 2h1v1h-1zM28 2h1v1h-1zM29 2h1v1h-1zM30 2h1v1h-1zM2 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM13 3h1v1h-1zM20 3h1v1h-1zM24 3h1v1h-1zM30 3h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM15 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM24 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM30 4h1v1h-1zM2 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM10 5h1v1h-1zM15 5h1v1h-1zM16 5h1v1h-1zM17 5h1v1h-1zM18 5h1v1h-1zM19 5h1v1h-1zM24 5h1v1h-1zM26 5h1v1h-1zM27 5h1v1h-1zM28 5h1v1h-1zM30 5h1v1h-1zM2 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM12 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM18 6h1v1h-1zM21 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM11 7h1v1h-1zM12 7h1v1h-1zM15 7h1v1h-1zM20 7h1v1h-1zM21 7h1v1h-1zM24 7h1v1h-1zM30 7h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM25 8h1v1h-1zM26 8h1v1h-1zM27 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM10 9h1v1h-1zM16 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM2 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM17 10h1v1h-1zM18 10h1v1h-1zM19 10h1v1h-1zM24 10h1v1h-1zM27 10h1v1h-1zM29 10h1v1h-1zM30 10h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM11 11h1v1h-1zM13 11h1v1h-1zM14 11h1v1h-1zM18 11h1v1h-1zM19 11h1v1h-1zM20 11h1v1h-1zM21 11h1v1h-1zM23 11h1v1h-1zM24 11h1v1h-1zM25 11h1v1h-1zM26 11h1v1h-1zM30 11h1v1h-1zM3 12h1v1h-1zM6 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM13 12h1v1h-1zM18 12h1v1h-1zM20 12h1v1h-1zM22 12h1v1h-1zM23 12h1v1h-1zM24 12h1v1h-1zM25 12h1v1h-1zM26 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM3 13h1v1h-1zM5 13h1v1h-1zM6 13h1v1h-1zM10 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM18 13h1v1h-1zM20 13h1v1h-1zM22 13h1v1h-1zM24 13h1v1h-1zM25 13h1v1h-1zM26 13h1v1h-1zM30 13h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM11 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM19 14h1v1h-1zM21 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM2 15h1v1h-1zM3 15h1v1h-1zM5 15h1v1h-1zM6 15h1v1h-1zM9 15h1v1h-1zM10 15h1v1h-1zM11 15h1v1h-1zM13 15h1v1h-1zM15 15h1v1h-1zM17 15h1v1h-1zM18 15h1v1h-1zM21 15h1v1h-1zM24 15h1v1h-1zM25 15h1v1h-1zM28 15h1v1h-1zM29 15h1v1h-1zM30 15h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM7 16h1v1h-1zM8 16h1v1h-1zM11 16h1v1h-1zM13 16h1v1h-1zM15 16h1v1h-1zM18 16h1v1h-1zM21 16h1v1h-1zM22 16h1v1h-1zM25 16h1v1h-1zM26 16h1v1h-1zM28 16h1v1h-1zM29 16h1v1h-1zM30 16h1v1h-1zM3 17h1v1h-1zM5 17h1v1h-1zM7 17h1v1h-1zM10 17h1v1h-1zM12 17h1v1h-1zM16 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM29 17h1v1h-1zM3 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM21 18h1v1h-1zM22 18h1v1h-1zM23 18h1v1h-1zM26 18h1v1h-1zM27 18h1v1h-1zM29 18h1v1h-1zM6 19h1v1h-1zM7 19h1v1h-1zM9 19h1v1h-1zM10 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM19 19h1v1h-1zM22 19h1v1h-1zM25 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM29 19h1v1h-1zM2 20h1v1h-1zM4 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM24 20h1v1h-1zM25 20h1v1h-1zM28 20h1v1h-1zM5 21h1v1h-1zM12 21h1v1h-1zM14 21h1v1h-1zM16 21h1v1h-1zM17 21h1v1h-1zM19 21h1v1h-1zM24 21h1v1h-1zM28 21h1v1h-1zM3 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM12 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM19 22h1v1h-1zM21 22h1v1h-1zM22 22h1v1h-1zM23 22h1v1h-1zM24 22h1v1h-1zM25 22h1v1h-1zM26 22h1v1h-1zM27 22h1v1h-1zM28 22h1v1h-1zM10 23h1v1h-1zM12 23h1v1h-1zM14 23h1v1h-1zM15 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM20 23h1v1h-1zM22 23h1v1h-1zM26 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM29 23h1v1h-1zM30 23h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM14 24h1v1h-1zM15 24h1v1h-1zM18 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM29 24h1v1h-1zM2 25h1v1h-1zM8 25h1v1h-1zM10 25h1v1h-1zM11 25h1v1h-1zM12 25h1v1h-1zM14 25h1v1h-1zM18 25h1v1h-1zM20 25h1v1h-1zM22 25h1v1h-1zM26 25h1v1h-1zM27 25h1v1h-1zM30 25h1v1h-1zM2 26h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM11 26h1v1h-1zM12 26h1v1h-1zM16 26h1v1h-1zM19 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM29 26h1v1h-1zM30 26h1v1h-1zM2 27h1v1h-1zM4 27h1v1h-1zM5 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM10 27h1v1h-1zM13 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM19 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM26 27h1v1h-1zM27 27h1v1h-1zM30 27h1v1h-1zM2 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM16 28h1v1h-1zM18 28h1v1h-1zM25 28h1v1h-1zM28 28h1v1h-1zM30 28h1v1h-1zM2 29h1v1h-1zM8 29h1v1h-1zM11 29h1v1h-1zM13 29h1v1h-1zM15 29h1v1h-1zM16 29h1v1h-1zM17 29h1v1h-1zM18 29h1v1h-1zM22 29h1v1h-1zM23 29h1v1h-1zM24 29h1v1h-1zM25 29h1v1h-1zM27 29h1v1h-1zM29 29h1v1h-1zM2 30h1v1h-1zM3 30h1v1h-1zM4 30h1v1h-1zM5 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM8 30h1v1h-1zM10 30h1v1h-1zM11 30h1v1h-1zM13 30h1v1h-1zM14 30h1v1h-1zM17 30h1v1h-1zM20 30h1v1h-1zM21 30h1v1h-1zM22 30h1v1h-1zM23 30h1v1h-1zM24 30h1v1h-1zM27 30h1v1h-1zM29 30h1v1h-1z"/></svg></div>
-  <div class="name">Alistair Hey</div>
-  <div class="sub">linkedin.com/in/alistair-hey</div>
-  <div class="hint">Tap anywhere to close</div>
+  <footer>
+    <span>Your picks are saved on this device only. Nothing is sent anywhere.</span>
+    <span>Agenda from <a href="https://conf.techmids.org" target="_blank" rel="noopener">conf.techmids.org</a><span id="updated"></span></span>
+  </footer>
 </div>
+<div class="toast" id="toast" role="status" hidden></div>
 
 <script>
-const DAY = "2026-11-27";
-const items = [
-  {t:"08:30", title:"Doors open and registration", who:"Welcome talk at 09:30", gap:true},
-  {t:"09:45", title:"You Don't Need Kubernetes", who:"Faith Sodipe · Bauer Media Outdoor", s:"Screen 1"},
-  {t:"10:30", title:"How routing and ETAs actually work", who:"Stefan Cornea · Signapse", s:"Screen 1"},
-  {t:"11:15", title:"Who Approved This PR? Oh Right, Nobody Did.", who:"Martin Reynolds · Harness", s:"Screen 3"},
-  {t:"12:00", title:"Lunch", gap:true},
-  {t:"13:00", title:"Everything We Stopped Owning", who:"Robert Curran · Perk", s:"Screen 1"},
-  {t:"13:45", title:"How to lead with hope when it all feels hopeless", who:"Steve Heyes · GoGlobal", s:"Screen 2"},
-  {t:"14:30", title:"Break", gap:true},
-  {t:"15:00", title:"Slop-Driven Development", who:"Jim Seconde · Vonage", s:"Screen 3"},
-  {t:"15:45", title:"The Killer Question", who:"Steve Wade · Platform Fix", s:"Screen 1"},
-  {t:"16:30", title:"AI is Inevitable", who:"Jess Rose · Bad Website Club", s:"Screen 3"},
-  {t:"17:15", title:"Close", gap:true, end:true}
-];
-const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+"use strict";
+const KEY_PICKS = "tmconf:picks:v1";   // { [slotId]: talkId } plus a talk->slot memory for spotting moves
+const KEY_AGENDA = "tmconf:agenda:v1"; // last good agenda.json, for offline use
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const mins = t => { const [h,m] = t.split(":").map(Number); return h*60+m; };
+const store = {
+  get(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e) { return null; } },
+  set(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} },
+  del(k){ try { localStorage.removeItem(k); } catch(e) {} },
+};
 
-// Current date and minute-of-day in Europe/London, whatever the phone's own timezone.
+let A = null;                                   // agenda
+let picks = store.get(KEY_PICKS) || {talks:{}}; // talks: { talkId: slotIdWhenPicked }
+if (!picks.talks) picks = {talks:{}};
+let view = "pick";
+const openDetails = new Set(); // keeps "About this talk" open across re-renders
+
+// ---------- Data ----------
+const talkIndex = () => { const m = new Map(); for (const s of A.slots) for (const t of (s.talks||[])) m.set(t.id, {slot:s, talk:t}); return m; };
+function pickFor(slot){
+  for (const t of slot.talks||[]) if (picks.talks[t.id]) return t;
+  return null;
+}
+function savePicks(){ store.set(KEY_PICKS, picks); }
+function setPick(slot, talk){
+  for (const t of slot.talks) delete picks.talks[t.id];
+  if (talk) picks.talks[talk.id] = slot.id;
+  savePicks();
+}
+// Picks whose talk vanished from the agenda, or whose talk moved to another time.
+function pickProblems(){
+  const idx = talkIndex(), gone = [], moved = [];
+  for (const [id, slotId] of Object.entries(picks.talks)) {
+    const hit = idx.get(id);
+    if (!hit) gone.push(slotId);
+    else if (hit.slot.id !== slotId) moved.push(hit);
+  }
+  return {gone, moved};
+}
+const speakerLine = t => t.speakers.length
+  ? t.speakers.map(k => A.speakers[k]).map(s => s.role ? `${s.name} · ${s.role}` : s.name).join(", ")
+  : t.by;
+const speakerName = t => t.speakers.length ? t.speakers.map(k => A.speakers[k].name).join(" & ") : t.by;
+const initials = n => String(n).split(/\s+/).filter(Boolean).slice(0,2).map(w => w[0]).join("").toUpperCase();
+
+// ---------- Time ----------
 function londonNow(){
   try {
     const p = Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/London",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"})
@@ -148,88 +221,229 @@ function londonNow(){
     return {ymd:`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`, min:d.getHours()*60+d.getMinutes()};
   }
 }
-// Last screen you were (or will be) in before item i, for room-change hints.
-function prevScreen(i){ for (let j=i-1;j>=0;j--) if (items[j].s) return items[j].s; return null; }
 function until(m){ const h = Math.floor(m/60), r = m%60; return m<=0 ? "now" : h ? `in ${h}h ${r}m` : `in ${r} min`; }
 
-function liveRow(kind, label, it, i, sub){
-  let room = "";
-  if (it && it.s) {
-    const prev = prevScreen(i);
-    room = prev && prev !== it.s ? `<span class="room">Room change: ${esc(prev)} → ${esc(it.s)}</span>`
-         : prev ? `<span class="room stay">Same room: ${esc(it.s)}</span>` : `<span class="room stay">${esc(it.s)}</span>`;
-  }
-  return `<div class="live-row ${kind}"><span class="tag">${label}</span><div>`+
-    `<div class="live-title">${esc(it ? it.title : "")}</div>`+
-    `<div class="live-sub">${sub}</div>${kind==="next"?room:""}</div></div>`;
+// ---------- Itinerary (what "My day" and the banner use) ----------
+function itinerary(){
+  return A.slots.map(s => {
+    if (s.kind === "fixed") return {slot:s, t:s.start, end:s.end, title:s.title, sub:s.note, gap:true};
+    const p = pickFor(s);
+    return p ? {slot:s, t:s.start, end:s.end, title:p.title, sub:speakerName(p), room:p.room, talk:p}
+             : {slot:s, t:s.start, end:s.end, title:"No talk picked", empty:true};
+  });
+}
+function prevRoom(items, i){ for (let j=i-1;j>=0;j--) if (items[j].room) return items[j].room; return null; }
+function roomHint(items, i){
+  const it = items[i]; if (!it.room) return "";
+  const prev = prevRoom(items, i);
+  return prev && prev !== it.room ? `<span class="room">Room change: ${esc(prev)} → ${esc(it.room)}</span>`
+       : prev ? `<span class="room stay">Same room: ${esc(it.room)}</span>` : `<span class="room stay">${esc(it.room)}</span>`;
 }
 
+// ---------- Render ----------
 function render(){
+  if (!A) return;
   const {ymd, min:cur} = londonNow();
-  const today = ymd === DAY;
+  const today = ymd === A.event.date;
+  const items = itinerary();
+  const talkSlots = A.slots.filter(s => s.kind === "talks");
+  const done = talkSlots.filter(pickFor).length;
+  $("count").textContent = ` ${done}/${talkSlots.length}`;
+
+  // Notices: shared picks link, and picks that no longer match the agenda.
+  let notes = "";
+  if (incoming) {
+    notes += `<div class="notice"><div>Someone shared their picks with you (${incoming.length} talk${incoming.length===1?"":"s"}).</div>
+      <div class="row"><button class="btn primary" type="button" data-act="import">Use these picks</button><button class="btn" type="button" data-act="dismiss">No thanks</button></div></div>`;
+  }
+  const {gone, moved} = pickProblems();
+  if (gone.length || moved.length) {
+    const lines = [];
+    if (gone.length) lines.push(`Your ${gone.map(g => esc(String(g).split("-")[0])).join(", ")} pick${gone.length===1?" is":"s are"} no longer on the agenda. Pick another talk for ${gone.length===1?"that slot":"those slots"}.`);
+    for (const m of moved) lines.push(`“${esc(m.talk.title)}” has moved to ${esc(m.slot.start)} in ${esc(m.talk.room)}.`);
+    notes += `<div class="notice warn"><div>${lines.join("<br>")}</div><div class="row"><button class="btn" type="button" data-act="ack">Got it</button></div></div>`;
+  }
+  $("notices").innerHTML = notes;
+
+  // Pick view
+  $("slots").innerHTML = A.slots.map(s => {
+    const past = today && cur >= mins(s.end), now = today && cur >= mins(s.start) && cur < mins(s.end);
+    const cls = ["slot", past?"past":"", now?"now":""].filter(Boolean).join(" ");
+    if (s.kind === "fixed") {
+      return `<div class="${cls}" id="s-${esc(s.id)}"><div class="fixed"><span class="slot-time">${esc(s.start)}</span><div><strong>${esc(s.title)}</strong>${s.note?` · ${esc(s.note)}`:""}</div></div></div>`;
+    }
+    const p = pickFor(s);
+    return `<div class="${cls}" id="s-${esc(s.id)}">
+      <div class="slot-head"><span class="slot-time">${esc(s.start)}–${esc(s.end)}</span><span class="slot-state ${p?"done":""}">${p?`Picked · ${esc(p.room)}`:"Pick one"}</span></div>
+      <div class="cards">${s.talks.map(t => {
+        const on = p && p.id === t.id;
+        const sp = t.speakers[0] && A.speakers[t.speakers[0]];
+        const av = sp && sp.img ? `<img src="${esc(sp.img)}" alt="" loading="lazy" width="48" height="48">` : esc(initials(speakerName(t)));
+        return `<div class="card${on?" picked":""}">
+          <button class="pick" type="button" aria-pressed="${on}" data-slot="${esc(s.id)}" data-talk="${esc(t.id)}">
+            <span class="avatar" aria-hidden="true">${av}</span>
+            <div><span class="screen">${esc(t.room)}</span><div class="title">${esc(t.title)}</div><div class="who">${esc(speakerLine(t))}</div></div>
+            <span class="tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>
+          </button>
+          ${t.abstract.length || t.url ? `<details data-talk="${esc(t.id)}"${openDetails.has(t.id)?" open":""}><summary>About this talk</summary><div class="abstract">${t.abstract.map(x => `<p>${esc(x)}</p>`).join("")}${t.url?`<p><a href="${esc(t.url)}" target="_blank" rel="noopener">Speaker page on conf.techmids.org</a></p>`:""}</div></details>` : ""}
+        </div>`;
+      }).join("")}</div></div>`;
+  }).join("");
+
+  // My day view
   let nowIdx = -1, nextIdx = -1;
   if (today) {
-    items.forEach((it,i) => { if (!it.end && cur >= mins(it.t) && cur < mins(items[i+1].t)) nowIdx = i; });
+    items.forEach((it,i) => { if (cur >= mins(it.t) && cur < mins(it.end)) nowIdx = i; });
     nextIdx = items.findIndex(it => mins(it.t) > cur);
   }
-  // Itinerary list
-  document.getElementById("agenda").innerHTML = items.map((it,i) => {
-    const ended = today && (it.end ? cur >= mins(it.t) : cur >= mins(items[i+1].t));
-    const cls = [it.gap?"gap":"", ended?"past":"", i===nowIdx?"now":"", i===nextIdx?"next":""].filter(Boolean).join(" ");
-    return `<li class="${cls}"><span class="t">${it.t}</span><div>`+
-      (it.s?`<span class="screen">${esc(it.s)}</span>`:"")+
+  $("day").innerHTML = items.map((it,i) => {
+    const ended = today && cur >= mins(it.end);
+    const cls = ["it", it.gap?"gap":"", it.empty?"empty":"", ended?"past":"", i===nowIdx?"now":"", i===nextIdx?"next":""].filter(Boolean).join(" ");
+    const prev = prevRoom(items, i);
+    return `<li class="${cls}"><span class="t">${esc(it.t)}</span><div>`+
+      (it.room?`<span class="screen">${esc(it.room)}</span>`:"")+
       `<div class="title">${esc(it.title)}</div>`+
-      (it.who?`<div class="who">${esc(it.who)}</div>`:"")+
-      (it.alt?`<div class="alt">${esc(it.alt)}</div>`:"")+`</div></li>`;
-  }).join("");
-  // Live banner
-  const live = document.getElementById("live");
+      (it.empty?`<button class="linkbtn" type="button" data-goto="${esc(it.slot.id)}">Pick a talk for ${esc(it.t)}</button>`:"")+
+      (it.sub?`<div class="who">${esc(it.sub)}</div>`:"")+
+      (it.room && prev && prev !== it.room ? `<div class="mv">Move from ${esc(prev)}</div>` : "")+
+      `</div></li>`;
+  }).join("") + `<li class="it gap${today && cur>=mins(A.event.end)?" past":""}"><span class="t">${esc(A.event.end)}</span><div><div class="title">Close</div></div></li>`;
+
+  // Live banner (only from the day before onwards, and once the person has a plan or it is the day)
+  const live = $("live");
   let html = "";
-  if (ymd < DAY) {
-    const days = Math.round((Date.parse(DAY) - Date.parse(ymd)) / 864e5);
-    html = liveRow("next", days===1?"TMRW":"SOON", items[0], 0, `Fri 27 Nov, doors 08:30 · ${days===1?"tomorrow":`in ${days} days`}`) +
-           liveRow("next", "1ST", items[1], 1, `09:45 · ${esc(items[1].s)} · ${esc(items[1].who)}`);
-  } else if (ymd > DAY || (today && cur >= mins("17:15"))) {
-    html = `<div class="live-row"><span class="tag">DONE</span><div><div class="live-title">That's a wrap for TechMids Conf 2026</div><div class="live-sub">Thanks for coming. Full agenda below.</div></div></div>`;
+  const firstTalk = items.findIndex(it => it.talk);
+  if (ymd < A.event.date) {
+    const days = Math.round((Date.parse(A.event.date) - Date.parse(ymd)) / 864e5);
+    html = `<div class="live-row next"><span class="tag">${days===1?"TMRW":"SOON"}</span><div><div class="live-title">${esc(A.event.title)}</div><div class="live-sub">Doors ${esc(A.event.start)} · ${days===1?"tomorrow":`in ${days} days`} · ${done}/${talkSlots.length} slots picked</div></div></div>`;
+    if (firstTalk >= 0) { const it = items[firstTalk]; html += `<div class="live-row next"><span class="tag">1ST</span><div><div class="live-title">${esc(it.title)}</div><div class="live-sub">${esc(it.t)} · ${esc(it.room)} · ${esc(it.sub)}</div></div></div>`; }
+  } else if (ymd > A.event.date || (today && cur >= mins(A.event.end))) {
+    html = `<div class="live-row"><span class="tag">DONE</span><div><div class="live-title">That's a wrap for ${esc(A.event.title)}</div><div class="live-sub">Thanks for coming.</div></div></div>`;
   } else {
     if (nowIdx >= 0) {
-      const it = items[nowIdx], endsAt = items[nowIdx+1].t;
-      html += liveRow("now", "NOW", it, nowIdx, `${it.t}–${endsAt}${it.s?` · ${esc(it.s)}`:""}${it.who&&!it.gap?` · ${esc(it.who)}`:""}`);
+      const it = items[nowIdx];
+      html += `<div class="live-row now"><span class="tag">NOW</span><div><div class="live-title">${esc(it.title)}</div><div class="live-sub">${esc(it.t)}–${esc(it.end)}${it.room?` · ${esc(it.room)}`:""}${it.talk?` · ${esc(it.sub)}`:""}</div></div></div>`;
     } else {
-      html += `<div class="live-row now"><span class="tag">NOW</span><div><div class="live-title">Before doors</div><div class="live-sub">Doors open 08:30</div></div></div>`;
+      html += `<div class="live-row now"><span class="tag">NOW</span><div><div class="live-title">Before doors</div><div class="live-sub">Doors open ${esc(A.event.start)}</div></div></div>`;
     }
-    if (nextIdx >= 0 && !items[nextIdx].end) {
+    if (nextIdx >= 0) {
       const it = items[nextIdx];
-      html += liveRow("next", "NEXT", it, nextIdx, `${it.t} · ${until(mins(it.t)-cur)}${it.who&&!it.gap?` · ${esc(it.who)}`:""}`);
-    } else if (nextIdx >= 0) {
-      html += `<div class="live-row next"><span class="tag">NEXT</span><div><div class="live-title">Close</div><div class="live-sub">17:15 · ${until(mins("17:15")-cur)}</div></div></div>`;
+      html += `<div class="live-row next"><span class="tag">NEXT</span><div><div class="live-title">${esc(it.title)}</div><div class="live-sub">${esc(it.t)} · ${until(mins(it.t)-cur)}${it.talk?` · ${esc(it.sub)}`:""}</div>${roomHint(items, nextIdx)}</div></div>`;
+    } else {
+      html += `<div class="live-row next"><span class="tag">NEXT</span><div><div class="live-title">Close</div><div class="live-sub">${esc(A.event.end)} · ${until(mins(A.event.end)-cur)}</div></div></div>`;
     }
   }
   live.innerHTML = html;
+  live.hidden = !html;
 }
-render();
+
+// ---------- Interaction ----------
+function show(v){
+  view = v;
+  $("tabPick").setAttribute("aria-selected", v === "pick");
+  $("tabDay").setAttribute("aria-selected", v === "day");
+  $("viewPick").hidden = v !== "pick";
+  $("viewDay").hidden = v !== "day";
+  try { sessionStorage.setItem("tmconf:view", v); } catch(e) {}
+}
+$("tabPick").addEventListener("click", () => show("pick"));
+$("tabDay").addEventListener("click", () => show("day"));
+
+let toastT = 0;
+function toast(msg){ const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2200); }
+
+$("slots").addEventListener("click", e => {
+  const b = e.target.closest("button.pick"); if (!b) return;
+  const slot = A.slots.find(s => s.id === b.dataset.slot); if (!slot) return;
+  const talk = slot.talks.find(t => t.id === b.dataset.talk);
+  const was = pickFor(slot);
+  setPick(slot, was && was.id === talk.id ? null : talk);
+  render();
+  const btn = document.querySelector(`button.pick[data-talk="${CSS.escape(talk.id)}"]`); btn && btn.focus({preventScroll:true});
+});
+$("slots").addEventListener("toggle", e => {
+  const d = e.target; if (!d.matches || !d.matches("details[data-talk]")) return;
+  d.open ? openDetails.add(d.dataset.talk) : openDetails.delete(d.dataset.talk);
+}, true);
+$("day").addEventListener("click", e => {
+  const b = e.target.closest("[data-goto]"); if (!b) return;
+  show("pick");
+  const el = document.getElementById("s-" + b.dataset.goto);
+  el && el.scrollIntoView({behavior:"smooth", block:"start"});
+});
+$("notices").addEventListener("click", e => {
+  const act = e.target.closest("[data-act]")?.dataset.act; if (!act) return;
+  if (act === "import") {
+    const idx = talkIndex(); picks = {talks:{}};
+    for (const id of incoming) { const h = idx.get(id); if (h) setPick(h.slot, h.talk); }
+    savePicks(); toast("Picks loaded"); show("day");
+  }
+  if (act === "ack") {
+    // Re-anchor moved picks to their new slot; drop picks for talks that are gone.
+    const idx = talkIndex(), next = {};
+    for (const id of Object.keys(picks.talks)) { const h = idx.get(id); if (h && !next[h.slot.id]) next[h.slot.id] = id; }
+    picks = {talks:{}}; for (const [sid, id] of Object.entries(next)) picks.talks[id] = sid; savePicks();
+  }
+  if (act === "import" || act === "dismiss") { incoming = null; history.replaceState(null, "", location.pathname + location.search); }
+  render();
+});
+$("clearBtn").addEventListener("click", () => {
+  if (!Object.keys(picks.talks).length) return;
+  const before = picks; picks = {talks:{}}; savePicks(); render();
+  const t = $("toast"); t.innerHTML = `Picks cleared · <button class="linkbtn" type="button" id="undo" style="color:inherit">Undo</button>`; t.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 5000);
+  $("undo").addEventListener("click", () => { picks = before; savePicks(); render(); t.hidden = true; });
+});
+$("shareBtn").addEventListener("click", async () => {
+  const ids = A.slots.map(pickFor).filter(Boolean).map(t => t.id);
+  if (!ids.length) { toast("Pick some talks first"); return; }
+  const url = `${location.origin}${location.pathname}#picks=${ids.map(encodeURIComponent).join(",")}`;
+  try {
+    if (navigator.share) { await navigator.share({title:"My TechMids Conf picks", url}); return; }
+  } catch(e) { if (e && e.name === "AbortError") return; }
+  try { await navigator.clipboard.writeText(url); toast("Link copied"); } catch(e) { prompt("Copy this link", url); }
+});
+
+// A shared link carries #picks=id,id,...
+let incoming = null;
+function readHash(){
+  const m = location.hash.match(/^#picks=(.*)$/);
+  if (!m) return;
+  const ids = m[1].split(",").map(decodeURIComponent).filter(Boolean);
+  if (ids.length) incoming = ids;
+}
+
+// ---------- Load ----------
+function useAgenda(data, from){
+  if (!data || !Array.isArray(data.slots)) return false;
+  A = data;
+  $("eyebrow").textContent = `${A.event.title} · Birmingham`;
+  const d = new Date(A.event.date + "T12:00:00Z").toLocaleDateString("en-GB", {weekday:"short", day:"numeric", month:"short", year:"numeric", timeZone:"Europe/London"});
+  $("meta").innerHTML = `${esc(d)} · ${esc(A.event.start)}–${esc(A.event.end)}<br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(A.event.venue + " " + A.event.address)}" target="_blank" rel="noopener">${esc(A.event.venue)}, ${esc(A.event.address)}</a>`;
+  $("updated").textContent = A.generated ? ` · updated ${new Date(A.generated).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"Europe/London"})}` : "";
+  render();
+  return true;
+}
+async function load(){
+  readHash();
+  try { const v = sessionStorage.getItem("tmconf:view"); if (v) show(v); } catch(e) {}
+  const cached = store.get(KEY_AGENDA);
+  if (cached) useAgenda(cached, "cache");
+  try {
+    const r = await fetch("agenda.json", {cache:"no-cache"});
+    if (!r.ok) throw new Error(r.status);
+    const fresh = await r.json();
+    if (!cached || fresh.version !== cached.version) { store.set(KEY_AGENDA, fresh); useAgenda(fresh, "network"); }
+  } catch(e) {
+    if (!A) $("slots").innerHTML = `<div class="notice warn">Couldn't load the agenda. Check your connection and reload. Once it has loaded once, this page works offline.</div>`;
+  }
+}
+load();
+window.addEventListener("hashchange", () => { readHash(); render(); });
 setInterval(render, 30000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) render(); });
-
-// QR overlay (QR is pre-rendered inline, so it works offline)
-const overlay = document.getElementById("overlay"), btn = document.getElementById("qrBtn");
-let lock = null;
-async function openQR(){
-  overlay.hidden = false; overlay.focus();
-  try { if (overlay.requestFullscreen) await overlay.requestFullscreen(); } catch(e) {}
-  try { if (navigator.wakeLock) lock = await navigator.wakeLock.request("screen"); } catch(e) {}
-}
-function closeQR(){
-  overlay.hidden = true; btn.focus();
-  try { if (document.fullscreenElement) document.exitFullscreen().catch(()=>{}); } catch(e) {}
-  try { lock && lock.release(); } catch(e) {} lock = null;
-}
-btn.addEventListener("click", openQR);
-overlay.addEventListener("click", closeQR);
-document.getElementById("closeBtn").addEventListener("click", e => { e.stopPropagation(); closeQR(); });
-document.addEventListener("keydown", e => { if (!overlay.hidden && (e.key === "Escape" || e.key === "Enter" || e.key === " ")) { e.preventDefault(); closeQR(); } });
-document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement && !overlay.hidden) overlay.hidden = true; });
+window.addEventListener("storage", e => { if (e.key === KEY_PICKS) { picks = store.get(KEY_PICKS) || {talks:{}}; render(); } });
+if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>
-
 </body>
 </html>

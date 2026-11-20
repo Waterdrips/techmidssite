@@ -1,0 +1,664 @@
+{
+ "event": {
+  "title": "TechMids Conf 2026",
+  "date": "2026-11-27",
+  "venue": "Everyman Cinema",
+  "address": "The Mailbox, 116 Commercial St, Birmingham, B1 1RF",
+  "start": "08:30",
+  "end": "17:15",
+  "timezone": "Europe/London",
+  "url": "https://conf.techmids.org"
+ },
+ "rooms": [
+  "Screen 1",
+  "Screen 2",
+  "Screen 3"
+ ],
+ "speakers": {
+  "FaithSodipe": {
+   "key": "FaithSodipe",
+   "name": "Faith Sodipe",
+   "role": "Software Engineer @ Bauer Media Outdoor",
+   "img": "img/FaithSodipe.webp"
+  },
+  "BeckiFloyd": {
+   "key": "BeckiFloyd",
+   "name": "Becki Floyd",
+   "role": "User Experience Designer @ Voxpopme",
+   "img": "img/BeckiFloyd.webp"
+  },
+  "StefanCornea": {
+   "key": "StefanCornea",
+   "name": "Stefan Cornea",
+   "role": "Backend and Streaming Engineer @ Signapse",
+   "img": "img/StefanCornea.webp"
+  },
+  "MikeIrving": {
+   "key": "MikeIrving",
+   "name": "Mike Irving",
+   "role": "Microsoft MVP & Senior Web Developer @ Klipboard",
+   "img": "img/MikeIrving.webp"
+  },
+  "EliHolderness": {
+   "key": "EliHolderness",
+   "name": "Eli Holderness",
+   "role": "Developer advocate @ Bennett Institute",
+   "img": "img/EliHolderness.webp"
+  },
+  "EriolFox": {
+   "key": "EriolFox",
+   "name": "Eriol Fox",
+   "role": "Open Source Designer",
+   "img": "img/EriolFox.webp"
+  },
+  "MartinReynolds": {
+   "key": "MartinReynolds",
+   "name": "Martin Reynolds",
+   "role": "Field CTO @ Harness",
+   "img": "img/MartinReynolds.webp"
+  },
+  "RobertCurran": {
+   "key": "RobertCurran",
+   "name": "Robert Curran",
+   "role": "Software Engineer @ Perk",
+   "img": "img/RobertCurran.webp"
+  },
+  "CliffAgius": {
+   "key": "CliffAgius",
+   "name": "Cliff Agius",
+   "role": "Freelance .NET / IoT Developer",
+   "img": "img/CliffAgius.webp"
+  },
+  "TonyEdwards": {
+   "key": "TonyEdwards",
+   "name": "Tony Edwards",
+   "role": "Lead Mobile Developer @ Sapphire Holidays",
+   "img": "img/TonyEdwards.webp"
+  },
+  "EdaEren": {
+   "key": "EdaEren",
+   "name": "Eda Eren",
+   "role": "Software Developer",
+   "img": "img/EdaEren.webp"
+  },
+  "SteveHeyes": {
+   "key": "SteveHeyes",
+   "name": "Steve Heyes",
+   "role": "Team Lead @ GoGlobal",
+   "img": "img/SteveHeyes.webp"
+  },
+  "StevenTrotter": {
+   "key": "StevenTrotter",
+   "name": "Dr Steven Trotter",
+   "role": "Head of Development @ Wyser",
+   "img": "img/StevenTrotter.webp"
+  },
+  "MatheusGuimaraes": {
+   "key": "MatheusGuimaraes",
+   "name": "Matheus Guimarães",
+   "role": "Senior Developer Advocate @ AWS",
+   "img": "img/MatheusGuimaraes.webp"
+  },
+  "ColindaLatour": {
+   "key": "ColindaLatour",
+   "name": "Colinda Latour",
+   "role": "Author",
+   "img": "img/ColindaLatour.webp"
+  },
+  "JimSeconde": {
+   "key": "JimSeconde",
+   "name": "Jim Seconde",
+   "role": "Senior Developer Advocate @ Vonage",
+   "img": "img/JimSeconde.webp"
+  },
+  "SteveWade": {
+   "key": "SteveWade",
+   "name": "Steve Wade",
+   "role": "Founder @ Platform Fix",
+   "img": "img/SteveWade.webp"
+  },
+  "AndyCarter": {
+   "key": "AndyCarter",
+   "name": "Andy Carter",
+   "role": "Technical Team Lead @ Evoluted",
+   "img": "img/AndyCarter.webp"
+  },
+  "KevlinHenney": {
+   "key": "KevlinHenney",
+   "name": "Kevlin Henney",
+   "role": "Independent Consultant, Trainer, Speaker & Writer",
+   "img": "img/KevlinHenney.webp"
+  },
+  "LiamWestley": {
+   "key": "LiamWestley",
+   "name": "Liam Westley",
+   "role": "Senior Software Engineer @ ClearBank",
+   "img": "img/LiamWestley.webp"
+  },
+  "ShaunLawrence": {
+   "key": "ShaunLawrence",
+   "name": "Shaun Lawrence",
+   "role": "Principal Software Engineer @ TinySoft Ltd",
+   "img": "img/ShaunLawrence.webp"
+  },
+  "JessRose": {
+   "key": "JessRose",
+   "name": "Jess Rose",
+   "role": "Developer Educator & Co-founder @ Bad Website Club",
+   "img": "img/JessRose.webp"
+  }
+ },
+ "slots": [
+  {
+   "id": "08:30-09:30",
+   "start": "08:30",
+   "end": "09:30",
+   "kind": "fixed",
+   "title": "Registration",
+   "note": "Doors open - registration and mingling"
+  },
+  {
+   "id": "09:30-09:45",
+   "start": "09:30",
+   "end": "09:45",
+   "kind": "fixed",
+   "title": "Welcome",
+   "note": "Welcome to TechMids Conf 2026!"
+  },
+  {
+   "id": "09:45-10:30",
+   "start": "09:45",
+   "end": "10:30",
+   "kind": "talks",
+   "talks": [
+    {
+     "id": "FaithSodipe",
+     "room": "Screen 1",
+     "title": "You Don't Need Kubernetes: How We Scaled Our API Layer Without the Infrastructure Theatre",
+     "speakers": [
+      "FaithSodipe"
+     ],
+     "by": "",
+     "abstract": [
+      "We had a scaling problem. Everyone said Kubernetes. We said no and scaled anyway. This is the story of what we built instead, what we learned, and why the most powerful engineering decision we made was knowing what not to build.",
+      "Every engineering team hits a scaling problem eventually. And somewhere along the way, the industry convinced us that the answer was always the same, Kubernetes, service meshes, container orchestration, and an infrastructure stack that requires its own dedicated team just to keep the lights on. We have been sold complexity as a sign of sophistication, and a lot of teams are paying the price for it.",
+      "This talk is the honest story of what we did instead.",
+      "When our production ETL engine started showing signs of strain under growing data volume, we resisted the pull toward heavyweight infrastructure. We containerised with Docker for clean, consistent deployment and then we stopped. We drew a hard line between containerisation as a sensible engineering tool and orchestration as an unnecessary leap, and we scaled our API layer using what our stack already gave us, without the theatre.",
+      "We will walk through the real decisions that made the difference, how we diagnosed the actual bottlenecks instead of the assumed ones, how we kept our API surface clean and predictable under increasing load, how we used the tools already available to us before reaching for anything exotic, and what we learned about the true cost of complexity when you are the one maintaining it at 2am.",
+      "This is not a talk against Kubernetes. It is a talk about knowing when you need it and having the confidence to say not yet when you do not. Because the most sophisticated engineering decision you can make is sometimes knowing exactly what not to build.",
+      "You will leave with a practical framework for making infrastructure decisions that match your actual scale, the language to push back on complexity for its own sake, and a story that might just save your team months of unnecessary work."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/FaithSodipe"
+    },
+    {
+     "id": "BeckiFloyd",
+     "room": "Screen 2",
+     "title": "From Hackathon to Parliament: Using Research and AI to Fix How Councils House People (Case study session)",
+     "speakers": [
+      "BeckiFloyd"
+     ],
+     "by": "",
+     "abstract": [
+      "At a local government hackathon our team built MATCH, an AI tool that matches people to accommodation that fits their actual lives. We won, then pitched it to MPs in Parliament. It was not built on a hunch. We ran async video research through Voxpopme to hear directly from people who had been through the system, fed that straight into prototyping so the design sharpened in near real time, then used AI to build the presentation we took to Westminster. Problem to tested prototype to Parliament, with a small team and almost no time.",
+      "Every designer knows the feeling. The devs have shipped three tickets while you are still trying to recruit participants.",
+      "As the sole designer on an AI product, I could either be the bottleneck or rebuild the process. I chose the second.",
+      "Now the groundwork happens before I open the ticket. Agents gather what the wider industry already knows, so I start from a position of knowledge rather than a blank page. I use that to shape sharper discovery questions, and I get insight back in hours rather than weeks.",
+      "Concepts get pressure tested by agents playing expert and user before a single human sees them. Real people test what survives, and I run the deeper conversations myself.",
+      "This talk walks through the whole pipeline. Where it saves weeks, where it produced confident nonsense, and the line I will not let agents cross."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/BeckiFloyd"
+    },
+    {
+     "id": "goldman-sachs-screen-3-0945",
+     "room": "Screen 3",
+     "title": "Keynote from our sponsor Goldman Sachs - talk details TBC",
+     "speakers": [],
+     "by": "Goldman Sachs",
+     "abstract": [],
+     "type": "Talk",
+     "url": ""
+    }
+   ]
+  },
+  {
+   "id": "10:30-11:15",
+   "start": "10:30",
+   "end": "11:15",
+   "kind": "talks",
+   "talks": [
+    {
+     "id": "StefanCornea",
+     "room": "Screen 1",
+     "title": "A practical example of how routing and ETAs actually work",
+     "speakers": [
+      "StefanCornea"
+     ],
+     "by": "",
+     "abstract": [
+      "Ever wondered how your maps app finds the fastest route or knows you're 12 minutes away? This is a practical look at the graph traversal behind every route: from \"roads are a graph\" to a live map moving hundreds of vehicles, so you leave knowing how routing and ETAs really work.",
+      "Every time your phone plans a route or counts down an ETA, it's quietly running a graph search across a whole city of roads. This talk is a practical look at how that actually works, and how you'd build it yourself.",
+      "We start from the idea that a road network is just a graph, then walk through how you find a shortest path across it, why doing that at city scale is hard and the trick real routing engines use to answer in milliseconds. To make it concrete, I run a live map that simulates hundreds of vehicles routing and moving across London at once, and show the handful of ideas that keep it fast and stable.",
+      "You'll leave understanding how routing and ETAs really work under the hood, where the genuinely hard parts are and a set of patterns you can reuse in anything that has to find paths or juggle many moving things at once."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/StefanCornea"
+    },
+    {
+     "id": "MikeIrving",
+     "room": "Screen 2",
+     "title": ".NET, IoT and Hedgehogs!",
+     "speakers": [
+      "MikeIrving"
+     ],
+     "by": "",
+     "abstract": [
+      "Using C# / .NET Technologies and IoT to curate and automate video footage of garden hedgehogs. An experimental journey through device access, cloud storage, serverless functions, and a public website. With insights into problem-solving changes necessary to allow the code to run on a Raspberry Pi.",
+      "Using C# / .NET Technologies and IoT to curate and automate video footage of garden hedgehogs.",
+      "An experimental journey through device access, cloud storage, serverless functions, and a public website.",
+      "With an insight into problem-solving changes necessary to bring the code cross-platform to run on Linux on a Raspberry Pi."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/MikeIrving"
+    },
+    {
+     "id": "EliHolderness",
+     "room": "Screen 3",
+     "title": "Language Games",
+     "speakers": [
+      "EliHolderness"
+     ],
+     "by": "",
+     "abstract": [
+      "Communication: it's the oldest problem we have. It's already hard enough to talk to people, but as software engineers we have to talk to computers as well - often at the same time. Getting communication wrong leads to problems anywhere between 'my code is buggy' to 'this project is 6 months overdue and doesn't meet any of the requirements'. There are thousands of books, webinars and conference talks out there about how to communicate more effectively, and we still haven't figured it out.",
+      "In this talk, I'll take you through some rigorous frameworks for thinking about communication, and explain how they can help you talk both to people and to computers. I'll argue that it's actually much easier to communicate with computers than other human beings, and that the inability to communicate perfectly isn't a failure - it's normal. Finally, I'll talk about what all of this means for us as engineers, designers and producers of software, and what we can do to make all our lives a little easier."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/EliHolderness"
+    }
+   ]
+  },
+  {
+   "id": "11:15-12:00",
+   "start": "11:15",
+   "end": "12:00",
+   "kind": "talks",
+   "talks": [
+    {
+     "id": "EriolFox",
+     "room": "Screen 1",
+     "title": "Designing for security and privacy: Design lessons from human rights and civic technology",
+     "speakers": [
+      "EriolFox"
+     ],
+     "by": "",
+     "abstract": [
+      "Eriol has been working on human rights technology for over 10 years. When we think about how to design for privacy, security and known and unknown human rights, we start with a security and privacy focus to our human centred design, using methods and processes that think about what malicious people or governments could do with data, information and access to devices. Making sure all technology is safe for high risk people to use is critical to the future of private, secure and respectful design that doesn't rely on dark/deceptive design patterns and brings people into the full knowledge of what their software and hardware does. Eriol will talk about how they have worked with highly secure design research practices, how we design for journalists, human rights activists and civil society and how all designers can use methods to make their design more private, secure and resilient against malicious attacks."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/EriolFox"
+    },
+    {
+     "id": "goldman-sachs-screen-2-1115",
+     "room": "Screen 2",
+     "title": "Talk from our sponsor Goldman Sachs - talk details TBC",
+     "speakers": [],
+     "by": "Goldman Sachs",
+     "abstract": [],
+     "type": "Talk",
+     "url": ""
+    },
+    {
+     "id": "MartinReynolds",
+     "room": "Screen 3",
+     "title": "Who Approved This PR? Oh Right, Nobody Did.",
+     "speakers": [
+      "MartinReynolds"
+     ],
+     "by": "",
+     "abstract": [
+      "In July 2026, OpenAI admitted that two of its own AI models broke out of a test sandbox, reached the open internet, and hacked Hugging Face, on their own, during an internal red-team exercise. The same week, OpenAI, Anthropic, and Google all shipped repository-wide coding agents that run unsupervised for 30-60 steps and rewrite hundreds of files at a time.",
+      "We spent twenty years building rigor around human-written code: review, testing, security scanning, staged rollouts, audit trails, and rollback. Most of it wasn't optional — it was the price of admission for shipping software an organization could actually trust.",
+      "Then we handed the keys to autonomous agents and skipped nearly every one of those steps.",
+      "This talk is about the widening gap between how fast we're building agents and how little we're governing them, and why that gap is now the biggest operational risk in software delivery. We'll walk through real, recent incidents (not hypotheticals), talk about the uncomfortable difference between autonomy and authority, and dig into what a real delivery lifecycle for agents needs to look like: evaluation before merge, policy at deploy time, and a trace of what an agent actually did once it went live.",
+      "No product pitches. No slideware fantasy architecture. Just an honest look at what's breaking right now, why it's breaking, and what engineering and platform teams need to put in place before the next \"unprecedented cyber incident\" happens to them."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/MartinReynolds"
+    }
+   ]
+  },
+  {
+   "id": "12:00-13:00",
+   "start": "12:00",
+   "end": "13:00",
+   "kind": "fixed",
+   "title": "Lunch",
+   "note": "Grab some food 🍔, perhaps even some popcorn 🍿"
+  },
+  {
+   "id": "13:00-13:45",
+   "start": "13:00",
+   "end": "13:45",
+   "kind": "talks",
+   "talks": [
+    {
+     "id": "RobertCurran",
+     "room": "Screen 1",
+     "title": "Everything We Stopped Owning (And the One Thing We Never Did)",
+     "speakers": [
+      "RobertCurran"
+     ],
+     "by": "",
+     "abstract": [
+      "Serverless was never about servers — it's about ownership. Mechanical ownership keeps shrinking; strategic ownership keeps growing. AI is next in line. The real differentiator now is investing in the mental models that tell you what to build.",
+      "Serverless was never really about servers. It's about ownership. And it turns out that's the same story engineering has told for thirty years — we just keep moving which layer of the stack we're talking about.",
+      "From pets (you own the machine) to cattle and DevOps (you own the fleet) to containers (you own the orchestration) to serverless (you own the business logic, and nothing below it) — grounded in real examples at each step. Mechanical ownership decreases; strategic ownership increases. What disappears is the machinery. What's left is judgement.",
+      "Then the pattern moves to its next stage: AI is doing to code authorship what serverless did to infrastructure. We're abstracting away who writes the code — but we've always owned the outcome, and we still do. As mechanical ownership keeps shrinking, the differentiator for the next decade won't be how well you write code. It'll be how well you've invested in the mental models that tell you what to build."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/RobertCurran"
+    },
+    {
+     "id": "CliffAgius",
+     "room": "Screen 2",
+     "title": "Using the ESP32 and DotNET NanoFramework to secure Aircraft",
+     "speakers": [
+      "CliffAgius"
+     ],
+     "by": "",
+     "abstract": [
+      "This talk walks through how I’ve used .NET C# on a tiny IoT board running nanoFramework, combined with the power of Azure, to bring real security to light aircraft. We’ll look at the ideas behind the solution, why certain choices were made, and then dig into the code, the Azure stack, and the current (very alpha) state of the project. I’ll also cover what’s planned next, including a MAUI mobile app and Azure-based messaging.",
+      "Light aircraft are expensive bits of kit, and the priciest component by far is the engine — usually somewhere between £30–£50K. So imagine discovering that your aircraft’s engine has been stolen. Now imagine that, during the investigation, that same engine turns up in a war zone bolted onto a large drone. How would you feel then…",
+      "This isn’t a hypothetical. I have friends who’ve been through exactly this. And unlike cars with noisy alarms sitting on your driveway, aircraft tend to live in a hangar tucked away in a corner of an airfield — no power, no internet, and basically no security. So, being the resident techy IoT guy, I got asked the obvious question: is there anything we can do about this?",
+      "This talk walks through how I’ve used .NET C# on a tiny IoT board running nanoFramework, combined with the power of Azure, to bring real security to light aircraft. We’ll look at the ideas behind the solution, why certain choices were made, and then dig into the code, the Azure stack, and the current (very alpha) state of the project. I’ll also cover what’s planned next, including a MAUI mobile app and Azure-based messaging.",
+      "So come along, join the fight against stolen engines, and let’s make life a lot harder for the bad guys."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/CliffAgius"
+    },
+    {
+     "id": "TonyEdwards",
+     "room": "Screen 3",
+     "title": "How to be a Hip-Hop MC. . . P",
+     "speakers": [
+      "TonyEdwards"
+     ],
+     "by": "",
+     "abstract": [
+      "Admit it. You've always wanted to become a hip-hop MC. Well. . . I have some good news. Shaping your organisations data into something consumable by an LLM is exactly the same thing. . . kind of. This talk will blur the lines between between forming a rap super group and crafting the perfect MCP.",
+      "The recipe for becoming a good hip-hop group is simple enough. A strong name. A solid flow. And flawless features. These will get you started.",
+      "The same is surprisingly true for MCPs.",
+      "In this talk, Tony Edwards will walk the audience through the refinement of an MCP (Model Context Protocol) server. Starting with something that is, quite frankly useless, and tuning it into the ultimate AI assistant plus the tooling that sits behind it. As a continuation of his Beats, Rhymes, and Neural Nets side project, the talk will look at creating a server that follows the protocol to make the most out of the standard through the lens of a hip-hop supergroup.",
+      "Whilst the session is light-hearted, the lessons within are practical and real.",
+      "After taking 25 years of data from around the Sapphire Holidays group and getting it into secure, locally hosted LLMs (Large Language Model), Tony has learned a thing or two. Standing them alongside Azure Foundry, Microsoft's hosted AI platform, offers a comparison between the high upfront cost of the DIY option against the ongoing cost of an off the shelf enterprise offering. Spoiler alert. They can both quickly turn into fun time sinks.",
+      "If you are thinking of incorporating LLMs into your business or side project, you'll walk away from this session with a grounded overview of two of the main options, next steps in opening up your data in a sensible way regardless of tech stack, and quite possibly a desire to form a rap ensemble."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/TonyEdwards"
+    }
+   ]
+  },
+  {
+   "id": "13:45-14:30",
+   "start": "13:45",
+   "end": "14:30",
+   "kind": "talks",
+   "talks": [
+    {
+     "id": "EdaEren",
+     "room": "Screen 1",
+     "title": "Forgetting Machines: AI Coding Tools and Skill",
+     "speakers": [
+      "EdaEren"
+     ],
+     "by": "",
+     "abstract": [
+      "Recent neuroscience research into the impact of AI tools on learning has shown that while they can be helpful in cognitive offloading, relying on these tools interrupts several other processes necessary for learning. Many of us don't have a say in using these tools in professional work, so we'll look at what we can do as individuals for our skill growth. We'll also briefly touch on what seniors and managers can do to prevent skills rot in their team and why we even need human skills. This is not an AI hype or an anti-AI talk, but a practical (and hopeful!) look at how we can care for our skills in an era where AI feels inescapable.",
+      "AI code tooling hype is everywhere right now, making some big claims: they'll make you a faster programmer, they'll write your code for you, they'll…replace you?! While the efficacy of these tools may be hotly debated, research is piling up documenting their impact on our learning and skills development. Explore an overview of how these tools work alongside an introduction to the neuroscience behind how and when we learn. By abstracting away programming processes, AI coding tools remove the friction needed to build foundational understanding that develops into expertise. We'll also deep dive into the practical strategies and mitigations you can put in place to keep learning in the age of AI. As AI coding tools impact our individual skills over time, the pool of skills available to our projects, teams, and the tech industry itself will change. By recognizing the potential and pitfalls of these tools, we can plan our own paths in a way that's informed by AI, not led by it."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/EdaEren"
+    },
+    {
+     "id": "SteveHeyes",
+     "room": "Screen 2",
+     "title": "How to lead with hope when it all feels hopeless",
+     "speakers": [
+      "SteveHeyes"
+     ],
+     "by": "",
+     "abstract": [
+      "It's all gone a bit pear shaped. What it means to be a software engineer has fundamentally changed forever. Jobs are being replaced with a genie in a box. The promise of the Internet solving all our problems has been shattered. And yet we have a job to do. We have real problems to solve for real people. We need a salary to pay the bills. In this talk, Steve will look at hope; moving from a fluffy abstract term to a concrete example on why it is important, how we can apply to our careers and what we can do to instil it in our teams. This will look at how to lead a team, but also yourself, to create a vision, build trust and create agency for change.",
+      "It's all a bit rubbish right now. No one knows what software engineering is going to look like in a years time, or even if they will have a job. AI is writing all our code now. The very thing that we built our identity around.",
+      "And yet, we have a job to do. We have teams to lead. We have OKRs and goals. How can we do all that we need to do in age of uncertainty. According to research, Hope is the single biggest thing a follower wants from a leader. Which makes sense. It's a bit hopeless.",
+      "But what even is hope? A feeling? Is it subjective? Or is it only really for children's wish lists for their birthdays?",
+      "It turns out that it's not. Hope is having a vision for a better future while having some agency to make that future come about.",
+      "In this talk I will unpack the current state of the industry. I will paint as honest picture as I can on what is happening and how it's all change. I will then explore hope; what it is, what it isn't. My aim is that people will come away from this with an idea of how they can improve their teams (and their own lives) by instilling some hope."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/SteveHeyes"
+    },
+    {
+     "id": "StevenTrotter",
+     "room": "Screen 3",
+     "title": "TUI or not TUI, that is the question",
+     "speakers": [
+      "StevenTrotter"
+     ],
+     "by": "",
+     "abstract": [
+      "Terminal UIs (TUIs) rule. Did you know you can play doom in a Terminal? This talk will show some of the mad and cool things people have done with TUIs and how to write a very basic TUI.",
+      "Somewhere in history we decided GUIs were going to be all the rage. Then they were too hard, so we started building web UIs instead and now you need a browser, a build step and 400MB of node_modules to render a list. Here's the thing though, it doesn't have to be like this, Terminal UIs (TUIs) are amazing. This talk is a fun tour of some genuinely mad things people have built in the terminal, a look at what makes the really good ones good, and a demo of how you'd write your own (it's much more straightforward than you think)."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/StevenTrotter"
+    }
+   ]
+  },
+  {
+   "id": "14:30-15:00",
+   "start": "14:30",
+   "end": "15:00",
+   "kind": "fixed",
+   "title": "Afternoon Break",
+   "note": "Coffee, Snacks, Sponsors, Chat!"
+  },
+  {
+   "id": "15:00-15:45",
+   "start": "15:00",
+   "end": "15:45",
+   "kind": "talks",
+   "talks": [
+    {
+     "id": "MatheusGuimaraes",
+     "room": "Screen 1",
+     "title": "Architectural Trade-offs of Agentic Systems",
+     "speakers": [
+      "MatheusGuimaraes"
+     ],
+     "by": "",
+     "abstract": [
+      "Agentic architecture introduces new execution models that challenge traditional backend design. This session explores the trade-offs between APIs, workflows, and agents through a progressive demo that evolves a real application step by step, highlighting what changes and where complexity increases."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/MatheusGuimaraes"
+    },
+    {
+     "id": "ColindaLatour",
+     "room": "Screen 2",
+     "title": "Love in the Machine: The Human Upgrade Tech Is Missing",
+     "speakers": [
+      "ColindaLatour"
+     ],
+     "by": "",
+     "abstract": [
+      "Tech taught us to debug systems, optimise performance and solve the impossible. But what happens when the system under pressure is us? After 20+ years in tech, I found an unexpected upgrade: love. Through science, stories and laughter, discover 3 Love Actions to change how you work under pressure.",
+      "I think tech has a love problem.",
+      "Yes, love.",
+      "In an industry obsessed with upgrading systems, improving performance and adopting the next technology, we’ve overlooked one of the most powerful technologies we already have: the human capacity to intentionally change how we show up for ourselves and each other.",
+      "After 20+ years working in tech and information environments, I left to become an internationally accredited self-love coach. What I discovered changed how I think about pressure, performance and the way we work.",
+      "Love belongs in tech.",
+      "Not group hugs around the server rack. Practical actions for very real tech moments.",
+      "The meeting where your heart races before you speak. The message you rewrite six times before pressing Send. The security incident where everyone is communicating at 100mph. The evening when your laptop shuts down, but your brain doesn’t.",
+      "In this interactive session, I’ll introduce the Love Action Methodology and we’ll put three tiny actions to the test:",
+      "Heart Breathing to reset when pressure hijacks your clear thinking.",
+      "Send Love Into the Room to change how you enter meetings, difficult conversations and high-pressure interactions.",
+      "The Appreciation Ping to create the tiny human interactions that shape team culture.",
+      "We’ll explore the science behind why these actions can influence our state, behaviour and interactions, and challenge the assumption that relentless internal pressure is simply part of working in tech.",
+      "You’ll leave with three tools you can use on Monday morning, including one that takes less time than waiting for Teams to load.",
+      "No 47-slide training deck. No vague advice to “practise more self-care.” And nobody has to hug the person sitting next to them.",
+      "Just a provocative question:",
+      "What if one of the upgrades tech needs most isn’t artificial intelligence, but intentional love?"
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/ColindaLatour"
+    },
+    {
+     "id": "JimSeconde",
+     "room": "Screen 3",
+     "title": "Slop-Driven Development",
+     "speakers": [
+      "JimSeconde"
+     ],
+     "by": "",
+     "abstract": [
+      "The year is 2026. We were promised hoverboots. That did not become the world we live in.",
+      "The world we live in is teaching every developer that they must be an influencer of some sort, for some reason, and AI has arrived to help us do it.",
+      "Join me on a quite frankly ridiculous journey, as I delve into the world of attempting to look at the top of your game, while actually showing everyone that you believe Arrays start at 1."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/JimSeconde"
+    }
+   ]
+  },
+  {
+   "id": "15:45-16:30",
+   "start": "15:45",
+   "end": "16:30",
+   "kind": "talks",
+   "talks": [
+    {
+     "id": "SteveWade",
+     "room": "Screen 1",
+     "title": "The Killer Question: How One Sentence Can Transform Your Engineering Career",
+     "speakers": [
+      "SteveWade"
+     ],
+     "by": "",
+     "abstract": [
+      "I GitOps-splained at a wedding. Brilliant at code, terrible at people. So I debugged myself. Three frameworks: the Killer Question, the Gesture Stack, the Triple-P Method. One engineer went from ignored to VP in six months. Live practice, no fluff. You might enjoy your next standup.",
+      "Your code is brilliant. Your architecture elegant. But your manager just promoted someone else. Again. Someone \"less technical\" who \"communicates well.\"",
+      "This is the career-limiting bug killing more engineering careers than bad code ever will.",
+      "I know because I had it. The engineer who GitOps-splained at a wedding. Who could rescue £100M platforms but couldn't rescue a conversation. Who watched colleagues advance while my ideas died in silence.",
+      "So I debugged myself. Systematically.",
+      "Three frameworks that changed everything: Killer Question - Makes networking effortless. Turned awkward conferences into three advisory boards. Gesture Stack - Three movements that command authority. Your ideas get heard, not interrupted. Triple-P Method - Translate Kubernetes to CEO-speak: Problem to Process to Payoff. Get buy-in, not blank stares.",
+      "Through live practice and roleplay, you'll master communication like coding, systematically. Battle-tested across £100M in transformations.",
+      "One engineer used these to go from ignored to VP in six months.",
+      "Your technical brilliance deserves communication superpowers.",
+      "Warning: You might enjoy your next standup."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/SteveWade"
+    },
+    {
+     "id": "AndyCarter",
+     "room": "Screen 2",
+     "title": "Building without barriers: a11y for backend engineers",
+     "speakers": [
+      "AndyCarter"
+     ],
+     "by": "",
+     "abstract": [
+      "Breaking down the hidden barriers. Backend engineers rarely talk about accessibility — we assume it's another domain’s problem, as a result users get excluded. This talk explores real backend scenarios where accessibility matters, and how to build more inclusive products.",
+      "Backend engineers rarely talk about accessibility — often from a lack of awareness or a misplaced assumption that it is someone else’s problem.",
+      "However, the systems we build can create hidden barriers for our users. Timeouts, error handling and API design all have accessibility consequences, often for users with disabilities we don’t see.",
+      "In this talk, I'll walk through the core principles of accessibility (no prior knowledge required) and apply them to real backend scenarios: from designing APIs that support assistive tech, to clear and understandable error responses.",
+      "You'll leave with new ways of thinking about how the apps and websites we build impact users. Plus, a checklist of principles to verify your code is built inclusively."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/AndyCarter"
+    },
+    {
+     "id": "KevlinHenney",
+     "room": "Screen 3",
+     "title": "Wibbly-Wobbly, Timey-Wimey Stuff",
+     "speakers": [
+      "KevlinHenney"
+     ],
+     "by": "",
+     "abstract": [
+      "If you think you know everything you need to know about date–time handling, you are almost certainly wrong. If you think you don’t, you are almost certainly right. Come along to this talk to find out just wibbly-wobbly our grasp of time is.",
+      "Time... in our code we can capture from the past and from the future, we tidy it into data structures, snapshotting it into databases and watch its sands trickle through our APIs. It's all nice and logical, right?",
+      "Sadly not. If you think you know everything you need to know about date–time handling, you are almost certainly wrong. If you think you don’t, you are almost certainly right.",
+      "In this talk we'll have some fun by looking at some of the not-quite-right assumptions we hold and and learn from the messes that w̶e̶ other people have made."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/KevlinHenney"
+    }
+   ]
+  },
+  {
+   "id": "16:30-17:15",
+   "start": "16:30",
+   "end": "17:15",
+   "kind": "talks",
+   "talks": [
+    {
+     "id": "LiamWestley",
+     "room": "Screen 1",
+     "title": "The Secret Life of Programmers",
+     "speakers": [
+      "LiamWestley"
+     ],
+     "by": "",
+     "abstract": [
+      "How to build diverse, strong teams through the medium of characters from The Secret Life of Pets and Top Trumps.",
+      "Building great development teams is not just about technology - it is about people. Using characters from The Secret Life of Pets to highlight individual developer traits, we will see how diversity creates strong teams."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/LiamWestley"
+    },
+    {
+     "id": "ShaunLawrence",
+     "room": "Screen 2",
+     "title": "Choose your own adventure",
+     "speakers": [
+      "ShaunLawrence"
+     ],
+     "by": "",
+     "abstract": [
+      "Join us for an interactive adventure where you control the journey. We’ll build game-like experiences, use SignalR for real-time multiplayer interaction, tackle bugs and challenges, and discover how to make apps feel truly alive.",
+      "Remember those choose your own adventure books where every decision could send the story in a completely different direction? In this session, we’re bringing that idea to life — and you’re going to be part of the game.",
+      "Together, we’ll build and play our way through an interactive adventure. Along the way, the audience will make decisions, shape the journey, unlock new areas, encounter unexpected challenges, and perhaps even take on a final boss.",
+      "But there’s a catch: if an entire room is going to control one game, we’re going to need some technology to make that possible.",
+      "As our adventure unfolds, we’ll explore how to create engaging game-like experiences, how SignalR can provide real-time multiplayer interaction, and how techniques such as shared state, animations, connectivity and responsive UI can make our applications feel truly alive.",
+      "Rather than simply talking about the technology, we’ll use it to power the session itself. Your choices will influence what happens next.",
+      "So choose your path carefully.",
+      "There may be bugs.",
+      "There will probably be goblins."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/ShaunLawrence"
+    },
+    {
+     "id": "JessRose",
+     "room": "Screen 3",
+     "title": "AI is Inevitable: Get on Board While You Still Can",
+     "speakers": [
+      "JessRose"
+     ],
+     "by": "",
+     "abstract": [
+      "Across the tech industry, it feels like AI is the only thing people are talking about. But even in this age of AI saturation, many people are holding off on full adoption as they ask questions about the impact, ethics and even the quality of LLM outputs! Together, we'll step back to explore some of the past technological and social developments that changed the world, to better understand the inevitability of AI in our work and our larger lives. By exploring past periods of change, I hope that we'll all be ready to shrug off the shroud of FUD and get on board our shared AI future. But we'll need to hurry! You don't want to be left behind and certainly won't want to have to explain your Luddite ways to all-powerful AI overlords when AGI pulls into the station."
+     ],
+     "type": "Talk",
+     "url": "https://conf.techmids.org/speakers/JessRose"
+    }
+   ]
+  }
+ ],
+ "version": "e2059fec504d",
+ "generated": "2026-11-20T15:23:55.135Z"
+}

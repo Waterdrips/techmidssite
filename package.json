@@ -1,0 +1,14 @@
+{
+  "name": "techmids-talk-picker",
+  "private": true,
+  "type": "module",
+  "description": "Pick one talk per slot at TechMids Conf and get your own itinerary.",
+  "scripts": {
+    "build": "node scripts/build-agenda.mjs .conf-src .",
+    "serve": "npx --yes http-server . -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.2",
+    "sharp": "0.33.5"
+  }
+}
